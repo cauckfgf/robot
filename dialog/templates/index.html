@@ -57,17 +57,16 @@
             answer:'',
             qustion_answer_head:[
                 {
-                    title: 'content',
-                    key: 'name'
+                    title: '问题',
+                    key: 'content'
                 },
                 {
-                    title: 'answer',
-                    key: 'age'
+                    title: '回答',
+                    key: 'answer'
+                    render: (h, params) => {
+                        return h('div', params.row.answer.content);
+                    }
                 },
-                {
-                    title: 'Address',
-                    key: 'address'
-                }
             ],
             qustion_answer:[]
         },
@@ -91,6 +90,12 @@
                     this.$Message.info("训练完成");
                 })
             }
+        },
+        created(){
+            var self = this;
+            $.ajax(`/api/answerme/?qustion=${this.qustion}`).done(res=>{
+                self.qustion_answer = res.results;
+            })
         }
     })
 
