@@ -15,7 +15,8 @@
     <template>
         <Row>
             <Col :xs="24" :sm="24" :md="24" :lg="4">
-                <i-Button type="primary">训练</i-Button><i-Button type="primary">清零重新训练</i-Button>
+                <i-Button type="primary" @click="train('train')">训练</i-Button>
+                <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
             </Col>
             <Col :xs="24" :sm="12" :md="12" :lg="10">
                 <i-Input v-model="qustion" size="large" placeholder="输入问题" @on-enter="enter"></i-Input>
@@ -41,6 +42,15 @@
                 var self = this;
                 $.ajax('/api/answerme/').done(res=>{
                     self.answer = res.answer;
+                })
+            },
+            train(act){
+                $.ajax({
+                    url:'/api/answerme/',
+                    type:"post",
+                    data:{action:act}
+                }).done(res=>{
+                    this.$Message.info("训练完成");
                 })
             }
         }

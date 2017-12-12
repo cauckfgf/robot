@@ -9,6 +9,8 @@ router.register(r'keywork', KeywordSet)
 router.register(r'answer', AnswerSet)
 router.register(r'question', QuestionSet)
 urlpatterns = [
+    url(r'^answerme/', AnswerMe),
+    url(r'^train/', Train),
     #restframe
     url(r'^rest/', include(router.urls)),
 
