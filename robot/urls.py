@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """robot URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -18,8 +19,11 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from robot import settings
 from django.conf.urls.static import static
+from .views import index
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', RedirectView.as_view(url='/index/')),
+    url(r'^index/$', index),
 ]
 urlpatterns += [
     url(r'^api/', include('dialog.urls')),
