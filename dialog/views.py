@@ -11,7 +11,7 @@ import json
 from .models import *
 
 class ActionSet(viewsets.ModelViewSet):
-    queryset = MepSystem.objects.all()
+    queryset = Action.objects.all()
     serializer_class = ActionSerializer
 
 class KeywordSet(viewsets.ModelViewSet):
