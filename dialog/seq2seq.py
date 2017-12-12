@@ -9,7 +9,7 @@ from tensorflow.contrib.rnn import LSTMCell, GRUCell
 from .dynamic_seq2seq_model import dynamicSeq2seq
 import jieba
 from .action import Action
-from setting import BASE_DIR
+ from robot.settings import BASE_DIR
 #from flask import Flask,request,jsonify
 
 class seq2seq():
@@ -32,15 +32,15 @@ class seq2seq():
         print("tensorflow version: ", tf.__version__)
         tf.reset_default_graph()
         
-        self.encoder_vec_file = "./preprocessing/enc.vec"
-        self.decoder_vec_file = "./preprocessing/dec.vec"
-        self.encoder_vocabulary = "./preprocessing/enc.vocab"
-        self.decoder_vocabulary = "./preprocessing/dec.vocab"
-        self.dictFile = os.path.join(BASE_DIR,'dialog/word_dict.txt')
+        self.encoder_vec_file = os.path.join(BASE_DIR,'dialog','preprocessing/enc.vec')
+        self.decoder_vec_file = os.path.join(BASE_DIR,'dialog','preprocessing/dec.vec')
+        self.encoder_vocabulary = os.path.join(BASE_DIR,'dialog','preprocessing/enc.vocab')
+        self.decoder_vocabulary = os.path.join(BASE_DIR,'dialog','preprocessing/dec.vocab')
+        self.dictFile = os.path.join(BASE_DIR,'dialog','word_dict.txt')
         self.batch_size = 1
         self.max_batches = 100000
         self.show_epoch = 100
-        self.model_path = './model/'
+        self.model_path = os.path.join(BASE_DIR,'dialog','model/')
 
         # jieba导入词典
         jieba.load_userdict(self.dictFile)
