@@ -9,7 +9,7 @@ from tensorflow.contrib.rnn import LSTMCell, GRUCell
 from .dynamic_seq2seq_model import dynamicSeq2seq
 import jieba
 from .action import Action
- from robot.settings import BASE_DIR
+from robot.settings import BASE_DIR
 #from flask import Flask,request,jsonify
 
 class seq2seq():
