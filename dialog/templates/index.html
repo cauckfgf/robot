@@ -40,7 +40,7 @@
         methods:{
             enter(){
                 var self = this;
-                $.ajax('/api/answerme/').done(res=>{
+                $.ajax(`/api/answerme/?qustion=${this.qustion}`).done(res=>{
                     self.answer = res.answer;
                 })
             },
