@@ -15,18 +15,27 @@
     <template>
         <Row>
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
-                <i-Input v-model="input_strs" size="large" :rows="4" placeholder="输入问题"></i-Input>
-                <i-Input v-model="target_strs" size="large" :rows="4" placeholder="输入回答"></i-Input>
-                <i-Button type="primary" @click="train('train')">训练</i-Button>
-                <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
+                <Card>
+                    <p slot="title">训练机器人</p>
+                    <i-Input v-model="input_strs" size="large" :rows="4" placeholder="输入问题"></i-Input>
+                    <i-Input v-model="target_strs" size="large" :rows="4" placeholder="输入回答"></i-Input>
+                    <i-Button type="primary" @click="train('train')">训练</i-Button>
+                    <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
+                </Card>
             </i-col>
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
-                <i-Input v-model="qustion" size="large" :rows="4" placeholder="输入问题" @on-enter="enter"></i-Input>
-                <i-Input v-model="answer" placeholder="应答" :rows="4" readonly="true"></i-Input>
-                <i-Button type="primary">获取内容</i-Button>
+                <Card>
+                    <p slot="title">测试机器人</p>
+                    <i-Input v-model="qustion" size="large" :rows="4" placeholder="输入问题" @on-enter="enter"></i-Input>
+                    <i-Input v-model="answer" placeholder="应答" :rows="4" readonly="true"></i-Input>
+                    <i-Button type="primary">获取内容</i-Button>
+                </Card>
             </i-col>
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
-                <i-table :columns="qustion_answer_head" :data="qustion_answer"></i-table>
+                <Card>
+                    <p slot="title">配置机器人</p>
+                    <i-table :columns="qustion_answer_head" :data="qustion_answer"></i-table>
+                </Card>
             </i-col>
         </Row>
     </template>
