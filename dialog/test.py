@@ -414,19 +414,18 @@ class seq2seq():
                         if i >= 3:
                             break
 
-# if __name__ == '__main__':
-#     seq = seq2seq()
-#     if sys.argv[1]:
-#         if sys.argv[1] == 'retrain':
-#             seq.clearModel(0)
-#             seq.train()
-#         elif sys.argv[1] == 'train':
-#             seq.train()
-#         elif sys.argv[1] == 'infer':
-#             seq.predict()  
-#         elif sys.argv[1] == 'chat':
-#             print(seq.chat())
-#         elif sys.argv[1] == 'online':
-#             seq.onlinelearning("为什么会打雷下雨", "问海尔兄弟去")
+if __name__ == '__main__':
+    seq = seq2seq()
+    if sys.argv[1]:
+        if sys.argv[1] == 'retrain':
+            seq.clearModel(0)
+            seq.train()
+        elif sys.argv[1] == 'train':
+            seq.train()
+        elif sys.argv[1] == 'infer':
+            seq.predict()  
+        elif sys.argv[1] == 'chat':
+            print(seq.chat())
+        elif sys.argv[1] == 'online':
+            seq.onlinelearning("为什么会打雷下雨", "问海尔兄弟去")
 
-seq = seq2seq()
