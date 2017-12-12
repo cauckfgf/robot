@@ -5,5 +5,3 @@ __location__
 __actChangeUsername__
 __actAddPlan__
 __robotname__
-谈生意
-王总

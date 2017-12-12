@@ -14,17 +14,20 @@
 <div id="app">
     <template>
         <Row>
-            <Col :xs="24" :sm="24" :md="24" :lg="4">
+            <i-col :xs="8" :sm="8" :md="8" :lg="8">
+                <i-Input v-model="input_strs" size="large" :rows="4" placeholder="输入问题"></i-Input>
+                <i-Input v-model="target_strs" size="large" :rows="4" placeholder="输入回答"></i-Input>
                 <i-Button type="primary" @click="train('train')">训练</i-Button>
                 <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
-            </Col>
-            <Col :xs="24" :sm="12" :md="12" :lg="10">
-                <i-Input v-model="qustion" size="large" placeholder="输入问题" @on-enter="enter"></i-Input>
+            </i-col>
+            <i-col :xs="8" :sm="8" :md="8" :lg="8">
+                <i-Input v-model="qustion" size="large" :rows="4" placeholder="输入问题" @on-enter="enter"></i-Input>
+                <i-Input v-model="answer" placeholder="应答" :rows="4" readonly="true"></i-Input>
                 <i-Button type="primary">获取内容</i-Button>
-            </Col>
-            <Col :xs="24" :sm="12" :md="12" :lg="10">
-                <i-Input v-model="answer" placeholder="应答" readonly></i-Input>
-            </Col>
+            </i-col>
+            <i-col :xs="8" :sm="8" :md="8" :lg="8">
+                <i-table :columns="qustion_answer_head" :data="qustion_answer"></i-table>
+            </i-col>
         </Row>
     </template>
 </div>
@@ -34,8 +37,24 @@
         el: "#app",
         delimiters: ["[[", "]]"],
         data: {
+            input_strs:'',
+            target_strs:'',
             qustion:'',
             answer:'',
+            qustion_answer_head:[
+                {
+                    title: 'Name',
+                    key: 'name'
+                },
+                {
+                    title: 'Age',
+                    key: 'age'
+                },
+                {
+                    title: 'Address',
+                    key: 'address'
+                }
+            ]
         },
         methods:{
             enter(){
@@ -48,7 +67,11 @@
                 $.ajax({
                     url:'/api/answerme/',
                     type:"post",
-                    data:{action:act}
+                    data:{
+                        action:act,
+                        input_strs: this.input_strs,
+                        target_strs: this.target_strs
+                    }
                 }).done(res=>{
                     this.$Message.info("训练完成");
                 })

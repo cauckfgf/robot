@@ -26,6 +26,7 @@ class AnswerSerializer(serializers.HyperlinkedModelSerializer):
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
     '''机电系统类型'''
     id = serializers.ReadOnlyField()
+    answer = AnswerSerializer()
     class Meta:
         model = Question
         fields = '__all__'
