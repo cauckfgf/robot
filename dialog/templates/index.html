@@ -2,8 +2,41 @@
 <html>
 <head>
     <title></title>
+    <script src="http://code.jquery.com/jquery-3.2.1.js"></script>
+    <!-- import Vue.js -->
+    <script src="//vuejs.org/js/vue.min.js"></script>
+    <!-- import stylesheet -->
+    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
+    <!-- import iView -->
+    <script src="//unpkg.com/iview/dist/iview.min.js"></script>
 </head>
 <body>
-robot
+<div id="app">
+    <template>
+        <i-Button type="primary">训练</i-Button><i-Button type="primary">清零重新训练</i-Button>
+         <Input v-model="qustion" size="large" placeholder="输入问题" @on-enter="enter"></Input>
+        <i-Button type="primary">获取内容</i-Button>
+        <i-Input v-model="answer" placeholder="应答" readonly></i-Input>
+    </template>
+</div>
 </body>
+<script type="text/javascript">
+    _app = new Vue({
+        el: "#app",
+        delimiters: ["[[", "]]"],
+        data: {
+            qustion:'',
+            answer:'',
+        },
+        methods:{
+            enter(){
+                var self = this;
+                $.ajax('/api/answerme/').done(res=>{
+                    self.answer = res.answer;
+                })
+            }
+        }
+    })
+
+</script>
 </html>

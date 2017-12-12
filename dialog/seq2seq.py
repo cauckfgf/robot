@@ -317,7 +317,40 @@ class seq2seq():
                     outstrs += self.dec_vecToSeg.get(vec, self.model.UNK)
                 print(outstrs)
                 
+    def answer(self,inputs_strs):
+        with tf.Session() as sess:
+            ckpt = tf.train.get_checkpoint_state(self.model_path)
+            if ckpt is not None:
+                print(ckpt.model_checkpoint_path)
+                self.model.saver.restore(sess, ckpt.model_checkpoint_path)
+            else:
+                print("没找到模型")
 
+            action = False
+
+            inputs_strs = re.sub("[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。“”’‘？?、~@#￥%……&*（）]+", "", inputs_strs)
+
+            action = False
+            segements = self.segement(inputs_strs)
+            #inputs_vec = [enc_vocab.get(i) for i in segements]
+            inputs_vec = []
+            for i in segements:
+                if i in self.location:
+                    tag_location = i
+                    Action.tag_location = i
+                    inputs_vec.append(self.enc_vocab.get("__location__", self.model.UNK))
+                    continue
+                inputs_vec.append(self.enc_vocab.get(i, self.model.UNK))
+            fd = self.make_inference_fd([inputs_vec])
+            inf_out = sess.run(self.model.decoder_prediction_inference, fd)
+            inf_out = [i[0] for i in inf_out]
+
+            outstrs = ''
+            for vec in inf_out:
+                if vec == self.model.EOS:
+                    break
+                outstrs += self.dec_vecToSeg.get(vec, self.model.UNK)
+            return outstrs
 
     def clearModel(self, remain=3):
         try:
@@ -379,18 +412,19 @@ class seq2seq():
                         if i >= 3:
                             break
 
-if __name__ == '__main__':
-    seq = seq2seq()
-    if sys.argv[1]:
-        if sys.argv[1] == 'retrain':
-            seq.clearModel(0)
-            seq.train()
-        elif sys.argv[1] == 'train':
-            seq.train()
-        elif sys.argv[1] == 'infer':
-            seq.predict()  
-        elif sys.argv[1] == 'chat':
-            print(seq.chat())
-        elif sys.argv[1] == 'online':
-            seq.onlinelearning("为什么会打雷下雨", "问海尔兄弟去")
-            
+# if __name__ == '__main__':
+#     seq = seq2seq()
+#     if sys.argv[1]:
+#         if sys.argv[1] == 'retrain':
+#             seq.clearModel(0)
+#             seq.train()
+#         elif sys.argv[1] == 'train':
+#             seq.train()
+#         elif sys.argv[1] == 'infer':
+#             seq.predict()  
+#         elif sys.argv[1] == 'chat':
+#             print(seq.chat())
+#         elif sys.argv[1] == 'online':
+#             seq.onlinelearning("为什么会打雷下雨", "问海尔兄弟去")
+
+seq = seq2seq()

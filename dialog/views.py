@@ -26,3 +26,24 @@ class AnswerSet(viewsets.ModelViewSet):
 class QuestionSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+from .seq2seq import seq
+@csrf_exempt
+def AnswerMe(request):
+    qustion = request.GET.get('request',None)
+    if qustion:
+        answer = seq.answer(qustion)
+        return HttpResponse(json.dumps({'answer':answer}), content_type="application/json" )
+    else:
+        return HttpResponse(json.dumps({'answer':'请提问'}), content_type="application/json" )
+
+@csrf_exempt
+def Train(request):
+    if request.method == 'POST':
+        action = request.POST.get('action',None)
+        if action=='train':
+            seq.train()
+        elif action=='retrain':
+            seq.clearModel(0)
+            seq.train()
+
