@@ -2,15 +2,14 @@
 from django.conf.urls import patterns, include, url
 from views import *
 
-
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register(r'action', ActionSet)
+router.register(r'keywork', KeywordSet)
+router.register(r'answer', AnswerSet)
+router.register(r'question', QuestionSet)
 urlpatterns = [
+    #restframe
+    url(r'^rest/', include(router.urls)),
 
-    url(r'^similar/$', similar),
-    url(r'^wx/$', wx),
-    url(r'^dialog/$', dialog),
 ]
-# import platform
-# if platform.system()=='Windows':
-#     urlpatterns += [
-#         url(r'^tensorflow/$', tensorflow),
-#     ]
