@@ -9,6 +9,7 @@ from tensorflow.contrib.rnn import LSTMCell, GRUCell
 from .dynamic_seq2seq_model import dynamicSeq2seq
 import jieba
 from .action import Action
+from setting import BASE_DIR
 #from flask import Flask,request,jsonify
 
 class seq2seq():
@@ -35,7 +36,7 @@ class seq2seq():
         self.decoder_vec_file = "./preprocessing/dec.vec"
         self.encoder_vocabulary = "./preprocessing/enc.vocab"
         self.decoder_vocabulary = "./preprocessing/dec.vocab"
-        self.dictFile = './word_dict.txt'
+        self.dictFile = os.path.join(BASE_DIR,'dialog/word_dict.txt')
         self.batch_size = 1
         self.max_batches = 100000
         self.show_epoch = 100
