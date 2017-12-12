@@ -58,7 +58,10 @@ ROOT_URLCONF = 'robot.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            '/usr/local/lib/python3.5/site-packages/rest_framework/templates',
+            os.path.join(os.path.split( os.path.dirname(__file__))[0],'dialog/templates').replace('\\','/'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +133,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 200
 }
+
+STATICFILES_DIRS = (
+    ("dialog",os.path.join(STATIC_ROOT, 'dialog')),
+)
