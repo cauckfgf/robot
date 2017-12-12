@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
-from views import *
+from .views import *
 
 from rest_framework import routers
 router = routers.DefaultRouter()
