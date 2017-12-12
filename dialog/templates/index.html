@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
     <!-- import iView -->
     <script src="//unpkg.com/iview/dist/iview.min.js"></script>
+    <style type="text/css">
+        .ivu-col{
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
@@ -17,8 +22,8 @@
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
                 <Card>
                     <p slot="title">训练机器人</p>
-                    <i-Input v-model="input_strs" size="large" :rows="4" placeholder="输入问题"></i-Input>
-                    <i-Input v-model="target_strs" size="large" :rows="4" placeholder="输入回答"></i-Input>
+                    <i-Input v-model="input_strs" type="textarea"  :rows="4" placeholder="输入问题"></i-Input>
+                    <i-Input v-model="target_strs" type="textarea"  :rows="4" placeholder="输入回答"></i-Input>
                     <i-Button type="primary" @click="train('train')">训练</i-Button>
                     <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
                 </Card>
@@ -26,8 +31,8 @@
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
                 <Card>
                     <p slot="title">测试机器人</p>
-                    <i-Input v-model="qustion" size="large" :rows="4" placeholder="输入问题" @on-enter="enter"></i-Input>
-                    <i-Input v-model="answer" placeholder="应答" :rows="4" readonly="true"></i-Input>
+                    <i-Input v-model="qustion" type="textarea" :rows="4" placeholder="输入问题" @on-enter="enter"></i-Input>
+                    <i-Input v-model="answer" type="textarea"  placeholder="应答" :rows="4" readonly="true"></i-Input>
                     <i-Button type="primary">获取内容</i-Button>
                 </Card>
             </i-col>
