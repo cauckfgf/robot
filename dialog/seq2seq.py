@@ -320,6 +320,7 @@ class seq2seq():
                 
     def answer(self,inputs_strs):
         with tf.Session() as sess:
+            print('self.model_path',self.model_path)
             ckpt = tf.train.get_checkpoint_state(self.model_path)
             if ckpt is not None:
                 print(ckpt.model_checkpoint_path)
