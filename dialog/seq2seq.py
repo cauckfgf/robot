@@ -10,6 +10,7 @@ from .dynamic_seq2seq_model import dynamicSeq2seq
 import jieba
 from .action import Action
 from robot.settings import BASE_DIR
+import logging
 #from flask import Flask,request,jsonify
 
 class seq2seq():
@@ -320,10 +321,10 @@ class seq2seq():
                 
     def answer(self,inputs_strs):
         with tf.Session() as sess:
-            print('self.model_path',self.model_path)
+            logging.debug(self.model_path)
             ckpt = tf.train.get_checkpoint_state(self.model_path)
             if ckpt is not None:
-                print(ckpt.model_checkpoint_path)
+                logging.debug(ckpt.model_checkpoint_path)
                 self.model.saver.restore(sess, ckpt.model_checkpoint_path)
             else:
                 print("没找到模型")
