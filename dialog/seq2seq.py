@@ -430,4 +430,4 @@ class seq2seq():
 #         elif sys.argv[1] == 'online':
 #             seq.onlinelearning("为什么会打雷下雨", "问海尔兄弟去")
 
-seq = seq2seq()
+# seq = seq2seq()

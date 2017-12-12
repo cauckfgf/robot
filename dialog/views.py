@@ -27,11 +27,12 @@ class QuestionSet(viewsets.ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
 
-from .seq2seq import seq
+from .seq2seq import seq2seq
 @csrf_exempt
 def AnswerMe(request):
     qustion = request.GET.get('qustion',None)
     if qustion:
+        seq = seq2seq()
         answer = seq.answer(qustion)
         return HttpResponse(json.dumps({'answer':answer}), content_type="application/json" )
     else:
