@@ -20,6 +20,7 @@ from django.contrib import admin
 from robot import settings
 from django.conf.urls.static import static
 from .views import index
+from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='/index/')),
