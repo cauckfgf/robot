@@ -4,5 +4,5 @@ from django.template import loader,Context,RequestContext
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 @csrf_exempt
-def index(request):
+def index_view(request):
     return render_to_response('index.html', RequestContext(request,locals()))

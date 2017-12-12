@@ -19,12 +19,12 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from robot import settings
 from django.conf.urls.static import static
-from .views import index
+from .views import index_view
 from django.views.generic.base import RedirectView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='/index/')),
-    url(r'^index/$', index),
+    url(r'^index/$', index_view),
 ]
 urlpatterns += [
     url(r'^api/', include('dialog.urls')),
