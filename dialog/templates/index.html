@@ -93,7 +93,7 @@
         },
         created(){
             var self = this;
-            $.ajax(`/api/answerme/?qustion=${this.qustion}`).done(res=>{
+            $.ajax(`/api/rest/question/`).done(res=>{
                 self.qustion_answer = res.results;
             })
         }
