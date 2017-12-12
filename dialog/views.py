@@ -30,7 +30,7 @@ class QuestionSet(viewsets.ModelViewSet):
 from .seq2seq import seq
 @csrf_exempt
 def AnswerMe(request):
-    qustion = request.GET.get('request',None)
+    qustion = request.GET.get('qustion',None)
     if qustion:
         answer = seq.answer(qustion)
         return HttpResponse(json.dumps({'answer':answer}), content_type="application/json" )
