@@ -33,7 +33,7 @@
                     <p slot="title">测试机器人</p>
                     <i-Input v-model="qustion" type="textarea" :rows="4" placeholder="输入问题" @on-enter="enter"></i-Input>
                     <i-Input v-model="answer" type="textarea"  placeholder="应答" :rows="4" disabled ></i-Input>
-                    <i-Button type="primary">获取内容</i-Button>
+                    <i-Button type="primary" @click="enter">获取内容</i-Button>
                 </Card>
             </i-col>
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
