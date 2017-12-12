@@ -20,14 +20,14 @@
     </template>
     <template>
     <Row>
-        <Col :xs="4" :sm="4" :md="6" :lg="8">
+        <Col :xs="24" :sm="24" :md="24" :lg="4">
             <i-Button type="primary">训练</i-Button><i-Button type="primary">清零重新训练</i-Button>
         </Col>
-        <Col :xs="10" :sm="16" :md="12" :lg="8">
+        <Col :xs="24" :sm="12" :md="12" :lg="10">
             <i-Input v-model="qustion" size="large" placeholder="输入问题" @on-enter="enter"></i-Input>
             <i-Button type="primary">获取内容</i-Button>
         </Col>
-        <Col :xs="10" :sm="4" :md="6" :lg="8">
+        <Col :xs="24" :sm="12" :md="12" :lg="10">
             <i-Input v-model="answer" placeholder="应答" readonly></i-Input>
         </Col>
     </Row>
