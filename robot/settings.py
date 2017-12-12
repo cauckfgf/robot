@@ -136,4 +136,5 @@ REST_FRAMEWORK = {
 
 STATICFILES_DIRS = (
     ("dialog",os.path.join(STATIC_ROOT, 'dialog')),
+    ("rest_framework",os.path.join(STATIC_ROOT, 'rest_framework')),
 )
