@@ -68,25 +68,44 @@
                 {
                     title: '问题',
                     key: 'content',
-                },
-                {
-                    title: '回答',
-                    key: 'answer',
                     render: (h, params) => {
+                        var c = params.row;
                         return h('MEditor',
                             {
                                 props:{
                                     type:'input'
                                 },
                                 model:{
-                                    value:params.row.answer.content,
+                                    value:c.content,
                                     callback:(t)=>{
-                                        params.row.answer.content = t;
-                                        this.put(params.row.answer);
+                                        c.content = t;
+                                        _app.put(c);
                                     }
                                 }
                             }, 
-                            params.row.answer.content
+                            c.content
+                        );
+                    }
+                },
+                {
+                    title: '回答',
+                    key: 'answer',
+                    render: (h, params) => {
+                        var c = params.row.answer;
+                        return h('MEditor',
+                            {
+                                props:{
+                                    type:'input'
+                                },
+                                model:{
+                                    value:c.content,
+                                    callback:(t)=>{
+                                        c.content = t;
+                                        _app.put(c);
+                                    }
+                                }
+                            }, 
+                            c.content
                         );
                     }
                 },
@@ -116,18 +135,66 @@
                     title: '关键字',
                     key: 'content',
                     render: (h, params) => {
-                        return h('div', params.row.action.url);
+                        var c = params.row;
+                        return h('MEditor',
+                            {
+                                props:{
+                                    type:'input'
+                                },
+                                model:{
+                                    value:c.content,
+                                    callback:(t)=>{
+                                        c.content = t;
+                                        _app.put(c);
+                                    }
+                                }
+                            }, 
+                            c.content
+                        );
                     }
                 },
                 {
                     title: '备注',
-                    key: 'remark'
+                    key: 'remark',
+                    render: (h, params) => {
+                        var c = params.row;
+                        return h('MEditor',
+                            {
+                                props:{
+                                    type:'input'
+                                },
+                                model:{
+                                    value:c.remark,
+                                    callback:(t)=>{
+                                        c.remark = t;
+                                        _app.put(c);
+                                    }
+                                }
+                            }, 
+                            c.remark
+                        );
+                    }
                 },
                 {
                     title: '业务',
                     key: 'action',
                     render: (h, params) => {
-                        return h('div', params.row.action.url);
+                        var c = params.row.action;
+                        return h('MEditor',
+                            {
+                                props:{
+                                    type:'input'
+                                },
+                                model:{
+                                    value:c.url?c.url:'空',
+                                    callback:(t)=>{
+                                        c.url = t;
+                                        _app.put(c);
+                                    }
+                                }
+                            }, 
+                            c.url
+                        );
                     }
                 },
                 {
