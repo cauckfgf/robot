@@ -186,7 +186,7 @@
                                     type:'input'
                                 },
                                 model:{
-                                    value:c.url?c.url:'空',
+                                    value:c.url==undefined?'空':c.url,
                                     callback:(t)=>{
                                         c.url = t;
                                         _app.put(c);
