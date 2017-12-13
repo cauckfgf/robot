@@ -142,7 +142,7 @@
                     self.QandA();
                     self.KandA();
                 });
-            }
+            },
             enter(){
                 var self = this;
                 $.ajax(`/api/answerme/?qustion=${this.qustion}`).done(res=>{
