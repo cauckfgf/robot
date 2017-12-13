@@ -74,6 +74,25 @@
                         return h('div', params.row.answer.content);
                     }
                 },
+                {
+                    title: '操作',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('Button', {
+                                props: {
+                                    type: 'error',
+                                    size: 'small'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.remove(params.row)
+                                    }
+                                }
+                            }, '删除')
+                        ]);
+                    }
+                },
+                    
             ],
             qustion_answer:[],
             keyword_head:[
@@ -92,10 +111,38 @@
                         return h('div', params.row.action.url);
                     }
                 },
+                {
+                    title: '操作',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('Button', {
+                                props: {
+                                    type: 'error',
+                                    size: 'small'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.remove(params.row)
+                                    }
+                                }
+                            }, '删除')
+                        ]);
+                    }
+                },
             ],
             keyword:[],
         },
         methods:{
+            remove(row){
+                var self = this;
+                $.ajax({
+                    url:row.url,
+                    type:"delete",
+                }).done(res=>{
+                    self.QandA();
+                    self.KandA();
+                });
+            }
             enter(){
                 var self = this;
                 $.ajax(`/api/answerme/?qustion=${this.qustion}`).done(res=>{
@@ -150,10 +197,18 @@
                 $.ajax(`/api/rest/question/`).done(res=>{
                     self.qustion_answer = res.results;
                 })
+            },
+            KandA(){
+                //keyword and action
+                var self = this;
+                $.ajax(`/api/rest/keyword/`).done(res=>{
+                    self.keyword = res.results;
+                })
             }
         },
         created(){
-            this.QandA()
+            this.QandA();
+            this.KandA()
         }
     })
 
