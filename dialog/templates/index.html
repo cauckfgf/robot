@@ -180,21 +180,26 @@
                     key: 'action',
                     render: (h, params) => {
                         var c = params.row.action;
-                        return h('MEditor',
-                            {
-                                props:{
-                                    type:'input'
-                                },
-                                model:{
-                                    value:c==null?'空':c.url,
-                                    callback:(t)=>{
-                                        c.url = t;
-                                        _app.put(c);
+                        if(c){
+                            return h('MEditor',
+                                {
+                                    props:{
+                                        type:'input'
+                                    },
+                                    model:{
+                                        value:c.url,
+                                        callback:(t)=>{
+                                            c.url = t;
+                                            _app.put(c);
+                                        }
                                     }
-                                }
-                            }, 
-                            c.url
-                        );
+                                }, 
+                                c.url
+                            );
+                        }else{
+                            return h('div','')
+                        }
+                        
                     }
                 },
                 {
