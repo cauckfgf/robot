@@ -8,6 +8,7 @@ class Action(models.Model):
 class Keyword(models.Model):
     '''关键字'''
     content = models.CharField(max_length=128,verbose_name=u'应答内容')
+    remark = models.CharField(max_length=128,verbose_name=u'备注')
     action = models.ForeignKey(Action,verbose_name='动作对应api',blank=True,null=True)
 
 class Answer(models.Model):
