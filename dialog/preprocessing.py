@@ -2,7 +2,7 @@ import jieba
 import re
 import os
 from dialog.models import *
-
+from robot.settings import BASE_DIR
 class preprocessing():
     __PAD__ = 0
     __GO__ = 1
