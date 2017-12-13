@@ -369,8 +369,11 @@ class seq2seq():
                 if vec == self.model.EOS:
                     break
                 outstrs += self.dec_vecToSeg.get(vec, self.model.UNK)
-            # segements = self.segement(inputs_strs)
-            keyword
+            segements = self.segement(outstrs)
+            for i in segements:
+                if i in self.keyword:
+                    r = Keyword.objects.filter(content=i)[0].action
+                    outstrs = outstrs.replace(i,r)
             return outstrs
 
     def clearModel(self, remain=3):
