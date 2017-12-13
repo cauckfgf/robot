@@ -179,7 +179,7 @@
                     title: '业务',
                     key: 'action',
                     render: (h, params) => {
-                        var c = params.row.action;
+                        var c = params.row;
                         if(c){
                             return h('MEditor',
                                 {
@@ -187,14 +187,41 @@
                                         type:'input'
                                     },
                                     model:{
-                                        value:c.url,
+                                        value:c.action,
                                         callback:(t)=>{
-                                            c.url = t;
+                                            c.action = t;
                                             _app.put(c);
                                         }
                                     }
                                 }, 
-                                c.url
+                                c.action
+                            );
+                        }else{
+                            return h('div','')
+                        }
+                        
+                    }
+                },
+                {
+                    title: '业务调用方式',
+                    key: 'actiontype',
+                    render: (h, params) => {
+                        var c = params.row;
+                        if(c){
+                            return h('MEditor',
+                                {
+                                    props:{
+                                        type:'input'
+                                    },
+                                    model:{
+                                        value:c.actiontype,
+                                        callback:(t)=>{
+                                            c.actiontype = t;
+                                            _app.put(c);
+                                        }
+                                    }
+                                }, 
+                                c.actiontype
                             );
                         }else{
                             return h('div','')
