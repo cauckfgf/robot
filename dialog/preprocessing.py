@@ -74,15 +74,22 @@ class preprocessing():
 
     def main(self):
         # 获得字典
-        self.wordToVocabulary(self.encoderFile, './preprocessing/enc.vocab', './preprocessing/enc.segement')
-        self.wordToVocabulary(self.decoderFile, './preprocessing/dec.vocab', './preprocessing/dec.segement')
+        encoderVocabFile = os.path.join(BASE_DIR,'dialog','preprocessing/enc.vocab')
+        encoderSegementFile = os.path.join(BASE_DIR,'dialog','preprocessing/enc.segement')
+        encoderVec = os.path.join(BASE_DIR,'dialog','preprocessing/enc.vec')
+        self.wordToVocabulary(self.encoderFile, encoderVocabFile, encoderSegementFile)
+
+        decoderVocabFile = os.path.join(BASE_DIR,'dialog','preprocessing/dec.vocab')
+        decoderSegementFile = os.path.join(BASE_DIR,'dialog','preprocessing/dec.segement')
+        decoderVec = os.path.join(BASE_DIR,'dialog','preprocessing/dec.vec')
+        self.wordToVocabulary(self.decoderFile, decoderVocabFile, decoderSegementFile)
         # 转向量
-        self.toVec("./preprocessing/enc.segement", 
-                   "./preprocessing/enc.vocab", 
-                   "./preprocessing/enc.vec")
-        self.toVec("./preprocessing/dec.segement", 
-                   "./preprocessing/dec.vocab", 
-                   "./preprocessing/dec.vec")
+        self.toVec(encoderSegementFile, 
+                   encoderVocabFile, 
+                   encoderVec)
+        self.toVec(decoderSegementFile, 
+                   decoderVocabFile, 
+                   decoderVec)
 
 pre = preprocessing()
 pre.main()
