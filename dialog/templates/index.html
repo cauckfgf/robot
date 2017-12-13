@@ -116,17 +116,20 @@
                         self.$Notice.success({
                             title:"训练完成",
                             duration:0
-
-                        })
+                        });
+                        this.QandA()
                     })
                 }
+            },
+            QandA(){
+                var self = this;
+                $.ajax(`/api/rest/question/`).done(res=>{
+                    self.qustion_answer = res.results;
+                })
             }
         },
         created(){
-            var self = this;
-            $.ajax(`/api/rest/question/`).done(res=>{
-                self.qustion_answer = res.results;
-            })
+            this.QandA()
         }
     })
 
