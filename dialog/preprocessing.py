@@ -1,5 +1,6 @@
 import jieba
 import re
+import os
 from dialog.models import *
 
 class preprocessing():
