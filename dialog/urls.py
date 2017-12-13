@@ -5,7 +5,7 @@ from .views import *
 from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'action', ActionSet)
-router.register(r'keywork', KeywordSet)
+router.register(r'keyword', KeywordSet)
 router.register(r'answer', AnswerSet)
 router.register(r'question', QuestionSet)
 urlpatterns = [

@@ -12,6 +12,7 @@ class ActionSerializer(serializers.HyperlinkedModelSerializer):
 class KeywordSerializer(serializers.HyperlinkedModelSerializer):
     '''机电系统类型'''
     id = serializers.ReadOnlyField()
+    action = ActionSerializer()
     class Meta:
         model = Keyword
         fields = '__all__'
