@@ -214,6 +214,15 @@ class seq2seq():
         return index
 
     def onlinelearning(self, input_strs, target_strs):
+        answer = None
+        if Answer.objects.filter(content=target_strs):
+            answer = Answer.objects.filter(content=target_strs)[0]
+        else:
+            answer = Answer.objects.create(content=target_strs)
+        if Question.objects.filter(content=input_strs):
+            Question.objects.filter(content=input_strs).update(answer=answer)
+        else:
+            Question.objects.create(content=input_strs,answer=answer)
         input_seg = jieba.lcut(input_strs)
         target_seg = jieba.lcut(target_strs)
 

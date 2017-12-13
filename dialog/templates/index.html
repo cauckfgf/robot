@@ -39,8 +39,8 @@
                 <Card>
                     <p slot="title">配置机器人</p>
                     <i-table :columns="qustion_answer_head" :data="qustion_answer"></i-table>
-                    <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
-                    <p>耗时比较长，会清空之前所有的训练数据，然后重新训练</p>
+                    <i-Button type="primary" @click="train('retrain')">失忆当前机器人，重新训练</i-Button>
+                    <p>失忆当前机器人，重新训练，耗时比较长，请耐心等待</p>
                 </Card>
             </i-col>
         </Row>
