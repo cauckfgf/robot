@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 
-class Action(models.Model):
-    '''业务api'''
-    url = models.CharField(max_length=128,verbose_name=u'业务url')
-
 class Keyword(models.Model):
     '''关键字'''
     content = models.CharField(max_length=128,verbose_name=u'应答内容')
     remark = models.CharField(max_length=128,verbose_name=u'备注')
-    action = models.ForeignKey(Action,verbose_name='动作对应api',blank=True,null=True)
+    action = models.CharField(max_length=128,verbose_name=u'业务url')
+    actiontype = models.CharField(max_length=128,verbose_name=u'url调用类型:get,put,post,delete')
 
 class Answer(models.Model):
     content = models.CharField(max_length=128,verbose_name=u'应答内容')

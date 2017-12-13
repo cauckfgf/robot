@@ -11,9 +11,6 @@ import json
 
 from .models import *
 
-class ActionSet(viewsets.ModelViewSet):
-    queryset = Action.objects.all()
-    serializer_class = ActionSerializer
 
 class KeywordSet(viewsets.ModelViewSet):
     queryset = Keyword.objects.all()
