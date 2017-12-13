@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">
     <!-- import iView -->
     <script src="//unpkg.com/iview/dist/iview.min.js"></script>
+    <script src="/static/dialog/clickEditor/Meditor.js"></script>
     <style type="text/css">
         .ivu-col{
             padding: 15px;
@@ -54,6 +55,7 @@
 </div>
 </body>
 <script type="text/javascript">
+    Vue.components('MEditor',MEditor)
     _app = new Vue({
         el: "#app",
         delimiters: ["[[", "]]"],
@@ -65,13 +67,27 @@
             qustion_answer_head:[
                 {
                     title: '问题',
-                    key: 'content'
+                    key: 'content',
                 },
                 {
                     title: '回答',
                     key: 'answer',
                     render: (h, params) => {
-                        return h('div', params.row.answer.content);
+                        return h('MEditor',
+                            {
+                                props:{
+                                    type:'input'
+                                },
+                                model:{
+                                    value:params.row.answer.content,
+                                    callback:(t)=>{
+                                        params.row.answer.content = t;
+                                        this.put(params.row.answer);
+                                    }
+                                }
+                            }, 
+                            params.row.answer.content
+                        );
                     }
                 },
                 {
@@ -98,7 +114,10 @@
             keyword_head:[
                 {
                     title: '关键字',
-                    key: 'content'
+                    key: 'content',
+                    render: (h, params) => {
+                        return h('div', params.row.action.url);
+                    }
                 },
                 {
                     title: '备注',
@@ -204,6 +223,15 @@
                 $.ajax(`/api/rest/keyword/`).done(res=>{
                     self.keyword = res.results;
                 })
+            },
+            put(row){
+                $.ajax({
+                    url:row.url,
+                    type:"put",
+                    data:row
+                }).done(res=>{
+
+                });
             }
         },
         created(){
