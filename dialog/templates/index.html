@@ -89,8 +89,6 @@
                                 type:"post",
                                 data:{
                                     action:act,
-                                    input_strs: self.input_strs,
-                                    target_strs: self.target_strs
                                 }
                             }).done(res=>{
                                 self.this.$Notice.success({
@@ -104,6 +102,22 @@
                         onCancel:()=>{
 
                         }
+                    })
+                }else if(act=="train"){
+                    $.ajax({
+                        url:'/api/train/',
+                        type:"post",
+                        data:{
+                            action:act,
+                            input_strs: self.input_strs,
+                            target_strs: self.target_strs
+                        }
+                    }).done(res=>{
+                        self.this.$Notice.success({
+                            title:"训练完成",
+                            duration:0
+
+                        })
                     })
                 }
             }
