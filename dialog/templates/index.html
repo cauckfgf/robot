@@ -82,7 +82,7 @@
                 var self = this;
                 if(act=="retrain"){
                     this.$Modal.confirm({
-                        title:"清空数据重新训练，确定么?"
+                        title:"清空数据重新训练，确定么?",
                         onOk:()=>{
                             $.ajax({
                                 url:'/api/train/',
