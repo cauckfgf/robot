@@ -1,6 +1,6 @@
 import jieba
 import re
-
+from dialog.models import *
 
 class preprocessing():
     __PAD__ = 0
@@ -9,11 +9,20 @@ class preprocessing():
     __UNK__ = 3
     vocab = ['__PAD__', '__GO__', '__EOS__', '__UNK__']
     def __init__(self):
-        self.encoderFile = "./question.txt"
-        self.decoderFile = './answer.txt'
-        self.dictFile = 'word_dict.txt'
-        jieba.load_userdict(self.dictFile)
-        self.stopwordsFile = "./preprocessing/stopwords.dat"
+        # self.encoderFile = "./question.txt"
+        # self.decoderFile = './answer.txt'
+        self.encoderFile = []
+        self.decoderFile = []
+        for each in Question.objects.all():
+            self.encoderFile.append(each.content)
+            self.decoderFile.append(each.answer.content)
+
+        # self.dictFile = 'word_dict.txt'
+        # jieba.load_userdict(self.dictFile)
+        for each in Keyword.objects.all().Keyword.objects.all().values_list("content",flat=True)
+            jieba.add_word(each)
+
+        # self.stopwordsFile = "./preprocessing/stopwords.dat"
         
     def wordToVocabulary(self, originFile, vocabFile, segementFile):
         # stopwords = [i.strip() for i in open(self.stopwordsFile).readlines()]
@@ -21,20 +30,19 @@ class preprocessing():
         # exit()
         vocabulary = []
         sege = open(segementFile, "w")
-        with open(originFile, 'r') as en:
-            for sent in en.readlines():
-                # 去标点
-                if "enc" in segementFile:
-                    #sentence = re.sub("[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。“”’‘？?、~@#￥%……&*（）]+", "", sent.strip())
-                    sentence = sent.strip()
-                    words = jieba.lcut(sentence)
-                    print(words)
-                else:
-                    words = jieba.lcut(sent.strip())
-                vocabulary.extend(words)
-                for word in words:
-                    sege.write(word+" ")
-                sege.write("\n")
+        for sent in originFile:
+            # 去标点
+            if "enc" in segementFile:
+                #sentence = re.sub("[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。“”’‘？?、~@#￥%……&*（）]+", "", sent.strip())
+                sentence = sent.strip()
+                words = jieba.lcut(sentence)
+                print(words)
+            else:
+                words = jieba.lcut(sent.strip())
+            vocabulary.extend(words)
+            for word in words:
+                sege.write(word+" ")
+            sege.write("\n")
         sege.close()
 
         # 去重并存入词典

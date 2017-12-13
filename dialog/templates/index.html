@@ -25,7 +25,6 @@
                     <i-Input v-model="input_strs" type="textarea"  :rows="4" placeholder="输入问题"></i-Input>
                     <i-Input v-model="target_strs" type="textarea"  :rows="4" placeholder="输入回答"></i-Input>
                     <i-Button type="primary" @click="train('train')">训练</i-Button>
-                    <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
                 </Card>
             </i-col>
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
@@ -40,6 +39,8 @@
                 <Card>
                     <p slot="title">配置机器人</p>
                     <i-table :columns="qustion_answer_head" :data="qustion_answer"></i-table>
+                    <i-Button type="primary" @click="train('retrain')">清零重新训练</i-Button>
+                    <p>耗时比较长，会清空之前所有的训练数据，然后重新训练</p>
                 </Card>
             </i-col>
         </Row>
@@ -78,17 +79,33 @@
                 })
             },
             train(act){
-                $.ajax({
-                    url:'/api/train/',
-                    type:"post",
-                    data:{
-                        action:act,
-                        input_strs: this.input_strs,
-                        target_strs: this.target_strs
-                    }
-                }).done(res=>{
-                    this.$Message.info("训练完成");
-                })
+                var self = this;
+                if(act=="retrain"){
+                    this.$Modal.confirm({
+                        title:"清空数据重新训练，确定么?"
+                        onOk:()=>{
+                            $.ajax({
+                                url:'/api/train/',
+                                type:"post",
+                                data:{
+                                    action:act,
+                                    input_strs: self.input_strs,
+                                    target_strs: self.target_strs
+                                }
+                            }).done(res=>{
+                                self.this.$Notice.success({
+                                    title:"训练完成",
+                                    duration:0
+
+                                })
+                            })
+
+                        },
+                        onCancel:()=>{
+
+                        }
+                    })
+                }
             }
         },
         created(){

@@ -48,6 +48,7 @@ def Train(request):
             target_strs = request.POST.get('target_strs',None)
             seq.onlinelearning(input_strs,target_strs)
         elif action=='retrain':
+            seq.preprocess()
             seq.clearModel(0)
             seq.train()
         return HttpResponse(json.dumps({'over':'succ'}), content_type="application/json" )

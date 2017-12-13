@@ -12,7 +12,8 @@ from .action import Action
 from robot.settings import BASE_DIR
 import logging
 #from flask import Flask,request,jsonify
-
+from dialog.models import *
+from .preprocessing import preprocessing
 class seq2seq():
     '''
     tensorflow-1.0.0
@@ -39,12 +40,14 @@ class seq2seq():
         self.decoder_vocabulary = os.path.join(BASE_DIR,'dialog','preprocessing/dec.vocab')
         self.dictFile = os.path.join(BASE_DIR,'dialog','word_dict.txt')
         self.batch_size = 1
-        self.max_batches = 100000
+        self.max_batches = 10000
         self.show_epoch = 100
         self.model_path = os.path.join(BASE_DIR,'dialog','model/')
 
         # jieba导入词典
-        jieba.load_userdict(self.dictFile)
+        # jieba.load_userdict(self.dictFile)
+        for each in Keyword.objects.all().Keyword.objects.all().values_list("content",flat=True)
+            jieba.add_word(each)
 
         self.model = dynamicSeq2seq(encoder_cell=LSTMCell(40),
                                     decoder_cell=LSTMCell(40), 
@@ -62,6 +65,9 @@ class seq2seq():
         self.enc_vocab = {}
         self.dec_vecToSeg = {}
         tag_location = ''
+        # with open(self.encoder_vocabulary, "r") as enc_vocab_file:
+        #     for index, word in enumerate(enc_vocab_file.readlines()):
+        #         self.enc_vocab[word.strip()] = index
         with open(self.encoder_vocabulary, "r") as enc_vocab_file:
             for index, word in enumerate(enc_vocab_file.readlines()):
                 self.enc_vocab[word.strip()] = index
@@ -374,6 +380,11 @@ class seq2seq():
                             os.remove(self.model_path+file)
         except Exception as e:
             return
+
+    def preprocess(self):
+        '''重新初始化准备数据'''
+        pre = preprocessing()
+        pre.main()
 
     def test(self):
         with tf.Session() as sess:
