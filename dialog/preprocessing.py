@@ -19,7 +19,7 @@ class preprocessing():
 
         # self.dictFile = 'word_dict.txt'
         # jieba.load_userdict(self.dictFile)
-        for each in Keyword.objects.all().Keyword.objects.all().values_list("content",flat=True)
+        for each in Keyword.objects.all().Keyword.objects.all().values_list("content",flat=True):
             jieba.add_word(each)
 
         # self.stopwordsFile = "./preprocessing/stopwords.dat"
