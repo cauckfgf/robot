@@ -46,7 +46,7 @@ class seq2seq():
 
         # jieba导入词典
         # jieba.load_userdict(self.dictFile)
-        for each in Keyword.objects.all().Keyword.objects.all().values_list("content",flat=True):
+        for each in Keyword.objects.all().values_list("content",flat=True):
             jieba.add_word(each)
 
         self.model = dynamicSeq2seq(encoder_cell=LSTMCell(40),
