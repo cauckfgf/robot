@@ -48,5 +48,7 @@ def Train(request):
             seq.preprocess()
             seq.clearModel(0)
             seq.train()
+        elif action=='deep':
+            seq.train()
         return HttpResponse(json.dumps({'over':'succ'}), content_type="application/json" )
 

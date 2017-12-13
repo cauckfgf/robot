@@ -43,10 +43,11 @@ class seq2seq():
         self.max_batches = 10000
         self.show_epoch = 100
         self.model_path = os.path.join(BASE_DIR,'dialog','model/')
-
+        #自定义业务字段
+        self.keyword = list(Keyword.objects.all().values_list("content",flat=True))
         # jieba导入词典
         # jieba.load_userdict(self.dictFile)
-        for each in Keyword.objects.all().values_list("content",flat=True):
+        for each in self.keyword:
             jieba.add_word(each)
 
         self.model = dynamicSeq2seq(encoder_cell=LSTMCell(40),
@@ -353,11 +354,11 @@ class seq2seq():
             #inputs_vec = [enc_vocab.get(i) for i in segements]
             inputs_vec = []
             for i in segements:
-                if i in self.location:
-                    tag_location = i
-                    Action.tag_location = i
-                    inputs_vec.append(self.enc_vocab.get("__location__", self.model.UNK))
-                    continue
+                # if i in self.location:
+                #     tag_location = i
+                #     Action.tag_location = i
+                #     inputs_vec.append(self.enc_vocab.get("__location__", self.model.UNK))
+                #     continue
                 inputs_vec.append(self.enc_vocab.get(i, self.model.UNK))
             fd = self.make_inference_fd([inputs_vec])
             inf_out = sess.run(self.model.decoder_prediction_inference, fd)
@@ -368,6 +369,8 @@ class seq2seq():
                 if vec == self.model.EOS:
                     break
                 outstrs += self.dec_vecToSeg.get(vec, self.model.UNK)
+            # segements = self.segement(inputs_strs)
+            keyword
             return outstrs
 
     def clearModel(self, remain=3):

@@ -41,7 +41,9 @@
                     <p slot="title">配置机器人</p>
                     <i-table :columns="qustion_answer_head" :data="qustion_answer"></i-table>
                     <i-Button type="primary" @click="train('retrain')">失忆当前机器人，重新训练</i-Button>
+                    <i-Button type="primary" @click="train('deep')">加深记忆</i-Button>
                     <p>失忆当前机器人，重新训练，耗时比较长，请耐心等待</p>
+                    <p>加深记忆，训练10000次</p>
                 </Card>
             </i-col>
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
@@ -292,7 +294,7 @@
 
                         }
                     })
-                }else if(act=="train"){
+                }else{
                     $.ajax({
                         url:'/api/train/',
                         type:"post",
