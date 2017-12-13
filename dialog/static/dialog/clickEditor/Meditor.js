@@ -72,10 +72,7 @@ var MEditor = {
         }
     },
     mounted(){
-        let style=document.createElement('style');
-        style.type='text/css';
-        style.href='style.css';
-        style.textContent = '.m-span:hover{background-color: lightgoldenrodyellow;}';
-        document.getElementsByTagName('head')[0].appendChild(style);
+        // .m-span:hover{background-color: lightgoldenrodyellow;}
+
     }
 };
