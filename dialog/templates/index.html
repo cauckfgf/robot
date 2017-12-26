@@ -27,6 +27,7 @@
                     <i-Input v-model="input_strs" type="textarea"  :rows="4" placeholder="输入问题"></i-Input>
                     <i-Input v-model="target_strs" type="textarea"  :rows="4" placeholder="输入回答"></i-Input>
                     <i-Button type="primary" @click="train('train')">训练</i-Button>
+                    <InputNumber :min="1" v-model="xlcs"></InputNumber>
                 </Card>
             </i-col>
             <i-col :xs="8" :sm="8" :md="8" :lg="8">
@@ -67,6 +68,7 @@
             target_strs:'',
             qustion:'',
             answer:'',
+            xlcs:1,//训练次数
             qustion_answer_head:[
                 {
                     title: '问题',
@@ -281,6 +283,7 @@
                                 type:"post",
                                 data:{
                                     action:act,
+                                    xlcs:self.xlcs,
                                 }
                             }).done(res=>{
                                 self.$Notice.success({

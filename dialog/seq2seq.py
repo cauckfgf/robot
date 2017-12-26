@@ -214,7 +214,7 @@ class seq2seq():
             self.dec_vecToSeg[index] = word
         return index
 
-    def onlinelearning(self, input_strs, target_strs):
+    def onlinelearning(self, input_strs, target_strs,xlcs):
         answer = None
         if Answer.objects.filter(content=target_strs):
             answer = Answer.objects.filter(content=target_strs)[0]
@@ -256,7 +256,7 @@ class seq2seq():
                              [target_vec],
                              1,
                              1)
-            for i in range(100):
+            for i in range(100*xlcs):
                 _, loss,_,_ = sess.run([self.model.train_op, 
                                         self.model.loss,
                                         self.model.gradient_norms,

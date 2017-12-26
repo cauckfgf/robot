@@ -43,7 +43,8 @@ def Train(request):
         if action=='train':
             input_strs = request.POST.get('input_strs',None)
             target_strs = request.POST.get('target_strs',None)
-            seq.onlinelearning(input_strs,target_strs)
+            target_strs = request.POST.get('xlcs',1)
+            seq.onlinelearning(input_strs,target_strs,int(xlcs))
         elif action=='retrain':
             seq.preprocess()
             seq.clearModel(0)
