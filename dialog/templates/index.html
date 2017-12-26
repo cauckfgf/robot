@@ -283,7 +283,6 @@
                                 type:"post",
                                 data:{
                                     action:act,
-                                    xlcs:self.xlcs,
                                 }
                             }).done(res=>{
                                 self.$Notice.success({
@@ -305,7 +304,8 @@
                         data:{
                             action:act,
                             input_strs: self.input_strs,
-                            target_strs: self.target_strs
+                            target_strs: self.target_strs,
+                            xlcs:self.xlcs,
                         }
                     }).done(res=>{
                         self.$Notice.success({
